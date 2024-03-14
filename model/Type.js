@@ -1,21 +1,17 @@
 import "../files/pokemon_type.js"
 import "../files/type_effectiveness.js"
 
-class Type {
-    constructor(type_attack, type_defense){
-        this.type_attack = type_attack;
-        this.type_defense = type_defense;        
+export class Type {
+    constructor(nomType){
+        this.nomType = nomType;
+        this.all_types = type_effectiveness;
     }
 
-    getEffectiveness(){
-        return type_effectiveness[this.type_attack][this.type_defense];
-    }
-
-    type_effectiveness(){
-        return type_effectiveness;
+    getEffectiveness(typeDefense){
+        return type_effectiveness[this.nomType][this.type_defense];
     }
 
     toString(){
-        return `Type: ${this.type_attack} - ${this.type_defense}`;
+        return `Type: ${this.type_attack}`;
     }
 }

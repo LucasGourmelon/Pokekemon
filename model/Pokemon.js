@@ -10,6 +10,7 @@ const txt = '{ "nom" : "Jupiter",
  "tellurique": false,
 "gravité": null }
 }
+
 ;
 let planete = JSON.parse(pokemon);
 console.log(planete.base_attack[0]); // Jupiter

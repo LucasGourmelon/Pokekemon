@@ -16,4 +16,7 @@ console.log(planete.base_attack[0]); // Jupiter
 console.log(planete.base_defense[00]); // Io
 console.log(planete.base_stamina[0]); // 69911
 console.log(planete.form[0]);
+console.log(planete.pokemon_id[0]);
+console.log(planete.pokemon_name[0]);
+
 
