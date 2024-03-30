@@ -1,7 +1,9 @@
-import {Pokemon} from "./modele/Pokemon.js";
+import { Pokemon } from './html/data/class_pokemon.js';
 
-$(document).ready(function(){
-    console.log("Document pret");
+// console.log('test');
 
-    console.log(Pokemon.getNormalPokemons());
-})
+document.getElementById('test').addEventListener('click', getPokemonsByType);
+
+function getPokemonsByType() {
+    console.log('test');
+}

@@ -1,0 +1,50 @@
+/* test.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.liste {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tests {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tests > div {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.tests a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    padding: 5px 10px; 
+    border-radius: 3px; 
+    transition: background-color 0.3s ease; 
+}
+
+.tests a:hover {
+    background-color: #ddd;
+}
+
+.tests p {
+    margin: 5px 0;
+    font-style: italic;
+}

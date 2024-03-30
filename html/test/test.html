@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css"> 
+
+    <title>Pokemon</title>
+</head>
+<body>
+    <script src="../data/charged_moves.js"></script>
+    <script src="../data/cp_multiplier.js"></script>
+    <script src="../data/fast_moves.js"></script>
+    <script src="../data/generation.js"></script>
+    <script src="../data/pokemon_moves.js"></script>
+    <script src="../data/pokemon_type.js"></script>
+    <script src="../data/pokemon.js"></script>
+    <script src="../data/type_effectiveness.js"></script>
+    <script type="module" src="../data/class_attack.js"></script>
+    <script type="module" src="../data/class_type.js"></script>
+    <script type="module" src="../data/class_pokemon.js"></script>
+    <script type="module" src="./test.js"></script>
+    
+    <h1>Listes des tests</h1>
+    <div class="liste">
+        <input type="text" id="commonField" placeholder="Entrez le nom du test">
+        <div class="tests">
+            <div class="tests-types">
+                <h2>Tests Types</h2>
+                <a href="#" id="getPokemonsByType">getPokemonsByType</a>
+                <p>Argument doit être le nom d'un type.</p>
+            </div>
+            
+            <div class="tests-pokemon">
+                <h2>Tests Pokemon</h2>
+                <a href="#" id="sortPokemonByName">sortPokemonByName</a>
+                <p>Pas d'argument.</p>
+                
+                <a href="#" id="sortPokemonByStamina">sortPokemonByStamina</a> 
+                <p>Pas d'argument.</p>
+                
+                <a href="#" id="getWeakestEnemies">getWeakestEnemies</a>
+                <p>Argument doit être le nom d'une attack.</p>
+                
+                <a href="#" id="getBestAttacksForEnemy">getBestAttackTypesForEnemy</a>
+                <p>Argument doit être le nom d'un pokémon.</p>
+            </div>
+
+
+            <div class="tests-attaques">
+                <h2>Tests Attaques</h2>
+                <a href="#" id="getPokemonsByAttack">getPokemonsByAttack</a>
+                <p>Argument doit être le nom d'une attaque.</p>
+                
+                <a href="#" id="getAttacksByType">getAttacksByType</a>
+                <p>Argument doit être le nom d'une attaque.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
