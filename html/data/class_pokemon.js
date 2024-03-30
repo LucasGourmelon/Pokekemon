@@ -66,6 +66,33 @@ export class Pokemon {
         });
     }
 
+    typesToString(){
+        let types = "";
+        for(let type in this._types){
+            types += type + " ";
+        }
+        return types;
+    }
+
+    attacksToString(){
+        let attacks = "";
+        for(let attack in this._attacks){
+            attacks += attack + " ";
+        }
+        return attacks;
+    }
+
+    getIdForImage(){
+        switch((this._pokemon_id.toString()).length){
+            case 1:
+                return "00" + this._pokemon_id;
+            case 2:
+                return "0" + this._pokemon_id;
+            default:
+                return this._pokemon_id;
+        }
+    }
+
     upgradeLevel(){
         this._level += 0.5;
     }
