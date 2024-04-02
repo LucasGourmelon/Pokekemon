@@ -47,20 +47,20 @@ export class Pokemon {
             
             let moves_of_pokemon = pokemon_moves.find((move) => move.pokemon_name == pokemon.pokemon_name && move.form == "Normal");
 
-            const createMoves = (moves, moveType) => {
+            const createMoves = (moves, moveType,is_charged_move) => {
                 moves.forEach((move) => {
                     let findMove = moveType.find((m) => m.name === move);
                     if (findMove !== undefined){
                         if(!(findMove.move_id in Attack.all_attacks)) {
-                            Attack.all_attacks[findMove.move_id] = Attack.createAttack(findMove, moveType);
+                            Attack.all_attacks[findMove.move_id] = Attack.createAttack(findMove, is_charged_move);
                         }
                         p.attacks[findMove.move_id] = Attack.all_attacks[findMove.move_id];
                     }
                 });
             };
 
-            createMoves(moves_of_pokemon.charged_moves, charged_moves);
-            createMoves(moves_of_pokemon.fast_moves, fast_moves);
+            createMoves(moves_of_pokemon.charged_moves, charged_moves,true);
+            createMoves(moves_of_pokemon.fast_moves, fast_moves,false);
             
             Pokemon.all_pokemons[p.id] = p;
         });

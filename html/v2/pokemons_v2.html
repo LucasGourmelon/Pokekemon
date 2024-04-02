@@ -38,7 +38,6 @@
     </table>
     <div id="pagination">
         <button id="page_precedente">PRÉC</button>
-        <span id="pageInfo"></span>
         <button id="page_suivante">SUIV</button>
     </div>
     <p>Page : <span id="no_page"></span>/<span id="nb_total_pages"></span></p>
@@ -54,6 +53,10 @@
             src: url('../fonts/pokemon_gb/PokemonGb-RAeo.ttf') format('truetype');
         }
 
+        body, button{
+            font-family: 'pokemon_gb';
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -63,16 +66,13 @@
             border: 1px solid black;
             padding: 8px;
             text-align: center;
+            
         }
         
         th {
             background-color: #f2f2f2;
             font-size: 25px;
             font-family: 'pokemon_font_hollow';
-        }
-        
-        tr{
-                font-family: 'pokemon_gb';
         }
 
         tr:nth-child(even) {

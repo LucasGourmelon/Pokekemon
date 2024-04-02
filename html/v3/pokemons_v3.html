@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokekemon</title>
+</head>
+<body>
+    <script src="../data/charged_moves.js"></script>
+    <script src="../data/cp_multiplier.js"></script>
+    <script src="../data/fast_moves.js"></script>
+    <script src="../data/generation.js"></script>
+    <script src="../data/pokemon_moves.js"></script>
+    <script src="../data/pokemon_type.js"></script>
+    <script src="../data/pokemon.js"></script>
+    <script src="../data/type_effectiveness.js"></script>
+    <script type="module" src="../data/class_attack.js"></script>
+    <script type="module" src="../data/class_type.js"></script>
+    <script type="module" src="../data/class_pokemon.js"></script>
+    <script type="module" src="./script_v3.js"></script>
+
+    <div id="modale">
+        <div id="fenetre_modale">
+            <button id="close_modale_button">X</button>
+            <h3 id="modale_nom"></h3>
+            <div>
+                <h4>Attaques chargées</h4>
+                <table id="modale_charged_attacks">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Puissance</th>
+                            <th>Durée</th>
+                            <th>Énergie</th>
+                            <th>Chance critique</th>
+                            <th>Stamina loss scaler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modale_tbody__charged">
+                            
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h4>Attaques rapides</h4>
+                <table id="modale_fast_attacks">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Puissance</th>
+                            <th>Durée</th>
+                            <th>Énergie</th>
+                            <th>Stamina loss scaler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modale_tbody_fast">
+                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modale_image">
+        <img src="" id="fenetre_modale_image">
+    </div>
+
+    <table id="table_pokemon">
+        <thead id="thead">
+            <tr>
+                <th>Identifiant</th>
+                <th>Nom</th>
+                <th>Génération</th>
+                <th>Types</th>
+                <th>Endurance</th>
+                <th>Points d'attaque de base</th>
+                <th>Points de défense de base</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            
+        </tbody>
+    </table>
+    <div id="pagination">
+        <button id="page_precedente">PRÉC</button>
+        <button id="page_suivante">SUIV</button>
+    </div>
+    <p>Page : <span id="no_page"></span>/<span id="nb_total_pages"></span></p>
+</body>
+    <style>
+        @font-face {
+            font-family: 'pokemon_font_hollow';
+            src: url('../fonts/pokemon_font/Pokemon\ Hollow.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'pokemon_gb';
+            src: url('../fonts/pokemon_gb/PokemonGb-RAeo.ttf') format('truetype');
+        }
+
+        body, button{
+            font-family: 'pokemon_gb';
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+            
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-size: 25px;
+            font-family: 'pokemon_font_hollow';
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #pagination {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        #pagination button {
+            width: 50%;
+        }
+
+        #modale_image{
+            display: none;
+            position: fixed;
+            top: 20vh;
+            left: 35vw;
+            width: 30%;
+            height: 60%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            border-radius: 50%;
+        }
+
+
+        #fenetre_modale_image{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #modale{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        #fenetre_modale{
+            font-size: 12px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            width: 60%;
+            height: 50%;
+            overflow: auto;
+        }
+
+        #modale button{
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            top: 0;
+            right: 0;
+        }
+
+        #modale table thead th{
+            font-size: 20px;
+        }
+    </style>    
+</html>

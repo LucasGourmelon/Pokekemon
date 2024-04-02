@@ -25,7 +25,11 @@ export class Attack{
         }
 
         return new Attack(move.move_id, move.name, move.type, move.power, move.duration, move.energy_delta, cc, move.stamina_loss_scaler,is_charged_move);
-    }    
+    }  
+    
+    get move_id(){
+        return this._move_id;
+    }
 
     get name(){
         return this._name;
