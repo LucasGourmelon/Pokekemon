@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function pokemon_show(pokemons) {
     let table = document.getElementById('table_pokemon');
-    console.log(Object.values(pokemons));
+
     Object.values(pokemons).forEach(pokemon => {
         let row = table.insertRow(-1);
         let id = row.insertCell(0);

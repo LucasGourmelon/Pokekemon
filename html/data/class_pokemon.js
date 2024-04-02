@@ -128,7 +128,7 @@ export class Pokemon {
     }
     
     toString() {
-        Pokemon.all_pokemons.forEach((pokemon) => {  
+        Object.values(Pokemon.all_pokemons).forEach((pokemon) => {  
             return `Pokemon: ${pokemon.pokemon_name} - ${pokemon.pokemon_id} - ${pokemon.form} - ${pokemon.base_attack} - ${pokemon.base_defense} - ${pokemon.base_stamina}`;
         });
     }
