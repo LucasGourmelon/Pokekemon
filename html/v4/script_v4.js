@@ -2,40 +2,73 @@ import {Pokemon} from '../data/class_pokemon.js';
 
 const taille_page = 25;
 
+var pokemon_tab = []; 
+
 document.addEventListener('DOMContentLoaded', function() {
     // set_cookie('page',1);
     let page = get_cookie('page');
-
+    
     if(page === ""){
         page = 1;
         set_cookie('page',page);
     }
-
-    Pokemon.import_pokemon();
-    console.log(Pokemon.all_pokemons);
-
-    let pokemon_tab = create_pokemeon_tab(Pokemon.all_pokemons);
-    let total_page = pokemon_tab.length - 1;
-    document.getElementById('nb_total_pages').textContent = total_page; 
     
-    pokemon_show(pokemon_tab);
-        
-    document.getElementById('page_suivante').addEventListener('click', function() {
-        changer_page(pokemon_tab,true);
-    });
-    document.getElementById('page_precedente').addEventListener('click', function() {
-        changer_page(pokemon_tab,false);
-    });
+    Pokemon.import_pokemon();
+    
+    initTypeOptions();
+    initGenerationOptions();
+    
+    let generation = document.getElementById('generation').value;
+    let type = document.getElementById('type').value;
+    let nom = document.getElementById('nom').value;
+    
+    create_pokemeon_tab(Pokemon.all_pokemons,generation,type,nom);
+    mise_a_jour_total_page();
+
+    let filtres = document.getElementsByClassName('filtrageField');
+    for (let i = 0; i < filtres.length; i++) {
+        filtres[i].addEventListener('input', function(){
+            set_cookie('page',1);
+            mise_a_jour_filtrage();
+        });
+    }
+    
+    pokemon_show();
 
     document.getElementById('close_modale_button').addEventListener('click', close_modale);
+
+    document.getElementById('page_suivante').addEventListener('click', function() {
+        changer_page(true);
+    });
+    document.getElementById('page_precedente').addEventListener('click', function() {
+        changer_page(false);
+    });
 });
 
 
-function create_pokemeon_tab(pokemons){
-    let pokemon_tab = [];
+function create_pokemeon_tab(pokemons,generation,type,nom){
+    pokemon_tab = [];
     let cpt = 1;
     let nb_page = 1;
     
+    if(generation !== "0"){
+        pokemons = Object.values(pokemons).filter(pokemon => {
+            return pokemon.generation == generation;
+        });
+    }
+
+    if(type !== "0"){   
+        pokemons = Object.values(pokemons).filter(pokemon => {
+            return Object.values(pokemon.types).some(t => t.name === type);
+        });
+    }
+
+    if(nom !== ""){
+        pokemons = Object.values(pokemons).filter(pokemon => {
+            return pokemon.pokemon_name.toLowerCase().includes(nom.toLowerCase());
+        });
+    }
+
     Object.values(pokemons).forEach(pokemon => {
         if(!(nb_page in pokemon_tab)){
             pokemon_tab[nb_page] = [];
@@ -48,11 +81,9 @@ function create_pokemeon_tab(pokemons){
             cpt = 1;
         }
     });
-
-    return pokemon_tab;
 }
 
-function pokemon_show(tab_pokemons) {
+function pokemon_show() {
     let page = get_cookie('page');
 
     let table = document.getElementById('table_pokemon');
@@ -60,7 +91,7 @@ function pokemon_show(tab_pokemons) {
     // gestion du depassement 
     if (parseInt(page) <= 1) {
         document.getElementById('page_precedente').disabled = true;
-    }else if(parseInt(page) >= (tab_pokemons.length-1)){
+    }else if(parseInt(page) >= (pokemon_tab.length-1)){
         document.getElementById('page_suivante').disabled = true;
     }else{
         document.getElementById('page_precedente').disabled = false;
@@ -70,7 +101,8 @@ function pokemon_show(tab_pokemons) {
     // affichage du numéro de page
     document.getElementById('no_page').textContent = page;
 
-    tab_pokemons[page].forEach(pokemon => {
+
+    pokemon_tab[page].forEach(pokemon => {
         let row = table.insertRow(-1);
         let id = row.insertCell(0);
         id.textContent = pokemon.pokemon_id;
@@ -111,7 +143,6 @@ function pokemon_show(tab_pokemons) {
 }
 
 function show_image_modale(id){
-    console.log(id);
     document.getElementById('fenetre_modale_image').src = '../webp/images/' + id + '.webp';
     document.getElementById('modale_image').style.display = 'block';
 }
@@ -171,21 +202,23 @@ function clean_table() {
     }
 }
 
-function changer_page(pokemon_tab,is_page_suivante){
+function changer_page(is_page_suivante){
     let page = get_cookie('page');
 
     if(is_page_suivante){
         page++;
-    }else{
+    }else if(!is_page_suivante){
         page--;
     }
-
+    
     set_cookie('page',page);
 
     clean_table();
-    pokemon_show(pokemon_tab);
+    pokemon_show();
 }
 
+
+/** Gestion des cookies */
 function set_cookie(name,value){
     document.cookie = name + "=" + value;
 }
@@ -201,4 +234,40 @@ function get_cookie(name){
         }
     }
     return "";
+}
+
+/** Fonctions de récupération des options des champs du formulaire de filtrage */
+function initTypeOptions(){
+    Object.values(Pokemon.getTypes()).forEach(type => {
+        document.getElementById('type').innerHTML += "<option value='" + type.name + "'>" + type.name + "</option>";
+    });
+}
+
+function initGenerationOptions(){
+    Object.values(Pokemon.all_generations).forEach(generation => {
+        if(generation === -1){
+            generation = "Pas de génération";
+        }
+        document.getElementById('generation').innerHTML += "<option value='" + generation + "'>" + generation + "</option>";
+    });
+}
+
+function mise_a_jour_filtrage(){
+    let generation = document.getElementById('generation').value;
+    let type = document.getElementById('type').value;
+    let nom = document.getElementById('nom').value;
+
+    clean_table();
+    create_pokemeon_tab(Pokemon.all_pokemons,generation,type,nom);
+    mise_a_jour_total_page();
+    pokemon_show();
+}
+
+function mise_a_jour_total_page(){
+    let total_page = pokemon_tab.length - 1;
+    if(total_page === -1){
+        total_page = 0;
+        set_cookie('page',0);
+    }
+    document.getElementById('nb_total_pages').textContent = total_page; 
 }

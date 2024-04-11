@@ -3,6 +3,7 @@ import { Attack } from "./class_attack.js";
 
 export class Pokemon {
     static all_pokemons = {};
+    static all_generations = {};
 
     constructor(pokemon_id, pokemon_name, form, base_attack, base_defense, base_stamina,generation) {
         this._pokemon_id = pokemon_id;
@@ -43,7 +44,9 @@ export class Pokemon {
                 }
                 p.types[type] = Type.all_types[type];
             });
-            
+
+            // Ajout des générations pour le filtrage
+            Pokemon.all_generations[generation_pokemon] = generation_pokemon;
             
             let moves_of_pokemon = pokemon_moves.find((move) => move.pokemon_name == pokemon.pokemon_name && move.form == "Normal");
 

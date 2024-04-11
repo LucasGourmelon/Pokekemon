@@ -1,4 +1,4 @@
-export class Type {name
+export class Type {
     static all_types = {};
 
     constructor(name){

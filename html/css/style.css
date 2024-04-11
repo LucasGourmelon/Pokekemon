@@ -85,7 +85,7 @@ tr:nth-child(even) {
     background-color: white;
     padding: 20px;
     width: 60%;
-    height: 50%;
+    height: 60%;
     overflow: auto;
 }
 
